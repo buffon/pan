@@ -13,26 +13,23 @@ public class AuthServlet extends BaseServlet {
 
 	private static final long serialVersionUID = 1L;
 
-	public void index(HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
+	public void index(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		LoginBean loginBean = RequestObjectMapping.mapToObj(request, LoginBean.class);
 		ImplControl impl = getIns(ImplControl.class);
 		boolean result = impl.auth(loginBean);
-        
-		String page = null;
 		if (result) {
+			String userid = impl.getUseridByName(loginBean.getUsername());
+			request.getSession().setAttribute("username", loginBean.getUsername());
+			request.getSession().setAttribute("userid", userid);
 			if (loginBean.getRole().equals("user")) {
-				System.out.println("user logins");
-				request.getSession().setAttribute("username", loginBean.getUsername());
+				request.getSession().setAttribute("role", "user");
 				response.sendRedirect("index.do");
 			} else {
-				System.out.println("admin logins");
-				request.getSession().setAttribute("adminname", loginBean.getUsername());
+				request.getSession().setAttribute("role", "admin");
 				response.sendRedirect("adminindex.do");
 			}
 		} else {
-			page = "/Pan/resource/page/login.jsp?message=wrong username or password";
-			response.sendRedirect(page);
+			response.sendRedirect("/Pan/resource/page/login.jsp?message=wrong username or password");
 		}
 	}
 

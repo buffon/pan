@@ -8,8 +8,11 @@ public class MissionBean extends BaseBean {
 	
 	private String id;
 	private String userid;
+	private String username;
 	private String missionname;
 	private String missiondiscrip;
+	private String startTime;
+	private String endTime;
 	private String status;
 	public String getId() {
 		return id;
@@ -41,7 +44,23 @@ public class MissionBean extends BaseBean {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	
-	
+	public String getStartTime() {
+		return startTime;
+	}
+	public void setStartTime(String startTime) {
+		this.startTime = startTime;
+	}
+	public String getEndTime() {
+		return endTime;
+	}
+	public void setEndTime(String endTime) {
+		this.endTime = endTime;
+	}
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
 
 }

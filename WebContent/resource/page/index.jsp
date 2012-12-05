@@ -8,23 +8,42 @@
 <%@ include file="common.inc.html"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.pan.bean.MissionBean"%>
+<style type="text/css">
+
+</style>
+<script type="text/javascript">
+function showDetail(str){
+	confirm(str);
+}
+
+</script>
 </head>
 <body>
-	<p class="lead" style="background-color: #BBFFEE; height: 80px">Mission
-		Track Management System</p>
+<%@ include file="head.inc.html"%>
+
 	<div align=right>
+	<%
+	if(request.getSession().getAttribute("role").equals("admin")){
+	%>
+	<a href="index.do">as user</a>&nbsp;|&nbsp;<a href="adminindex.do">as admin</a>&nbsp;|&nbsp;
+	<%
+	}
+	%>
 		<a href="logout.do">logout</a>
 	</div>
-	<p class="lead" style="margin-left: 20px">User <%=request.getAttribute("username") %></p>
+	<p class="lead text-info" style="margin-left: 20px">User <strong><%=request.getSession().getAttribute("username") %></strong></p>
 
 	<div>
-		<p class="lead" style="margin-left: 20px">Existing Missions</p>
+		<p class="text-success" style="margin-left: 20px"><strong>Existing Missions</strong></p>
 		<table class="table table-striped"
 			style="width: 60%; margin-left: 20px">
 			<tr>
-				<td>mission name |</td>
-				<td>description |</td>
-				<td>status |</td>
+				<td><strong>mission name |</strong></td>
+				<td><strong>description |</strong></td>
+				<td><strong>start time</strong></td>
+				<td><strong>end time</strong></td>
+				<td><strong>status |</strong></td>
+				<td></td>
 				<td></td>
 			</tr>
 			<%
@@ -34,12 +53,17 @@
 			<tr>
 				
 				<td><%=missions.get(i).getMissionname()%></td>
-				<td><%=missions.get(i).getMissiondiscrip()%></td>
-				<td><%=missions.get(i).getStatus()%></td>
+				<td><a href="" onclick="showDetail('<%=missions.get(i).getMissiondiscrip()%>')">detail</a></td>
+				<td><%=missions.get(i).getStartTime()%></td>
+				<td><%=missions.get(i).getEndTime()%></td>
+				<td><strong><%=missions.get(i).getStatus()%></strong></td>
 				
 					<%
 						if (missions.get(i).getStatus().equals("finished")) {
-
+                    %>
+                    <td></td>
+                    <td></td>
+                    <% 
 						} else {
 					%>
 				           <td><a href="mdetail.do?missionid=<%=missions.get(i).getId() %>">manager</a></td>
@@ -56,17 +80,19 @@
 	</div>
 	<br>
 	<br>
-	<p class="lead" style="margin-left: 20px">New a Mission</p>
+	<p class="text-success" style="margin-left: 20px"><strong>New a Mission</strong></p>
 	<div class="new">
 	<form action="addmission.do" method="post">
 		<table style="margin-left: 20px">
 			<tr>
-				<td>mission name</td>
-				<td><input type="text" name="missionname"></td>
+				<td><strong>mission name</strong></td>
+				<td><input type="text" name="missionname" size=47></td>
 			</tr>
 			<tr>
-				<td>description</td>
-				<td><input type="text" name="description"></td>
+				<td><strong>description</strong></td>
+				<td><!-- <input type="text" name="description"> -->
+				  <textarea name="description" rows=10 cols=40></textarea>
+				</td>
 			</tr>
 			<tr>
 				<td><input type="submit" value="add"></td>

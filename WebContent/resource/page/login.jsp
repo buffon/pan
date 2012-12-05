@@ -23,10 +23,9 @@ if(message != null){
 -->
 </head>
 <body>
+<%@ include file="head.inc.html"%>
 	<div class="login">
-		<p class="lead" style="background-color: #BBFFEE; height: 80px">Mission
-			Track Management System</p>
-		<p class="lead" style="margin-left: 20px">login</p>
+		<p class="lead text-info" style="margin-left: 20px">welcome to login</p>
 		<%
 			Object message = request.getParameter("message");
 			if (message != null) {
@@ -37,16 +36,16 @@ if(message != null){
 			<div id="message"></div>
 			<table class="table" style="width: 20%">
 				<tr>
-					<td>username</td>
+					<td><p class="text-success"><strong>username</strong></p></td>
 					<td><input type="text" name="username"></td>
 				</tr>
 				<tr>
-					<td>password</td>
+					<td><p class="text-success"><strong>password</strong></p></td>
 					<td><input type="text" name="password"></td>
 				</tr>
 				<tr>
-					<td><input type="radio" value="admin" name="role">admin</td>
-					<td><input type="radio" value="user" name="role">user</td>
+					<td><p class="text-success"><input type="radio" value="admin" name="role"><strong>admin</strong></p></td>
+					<td><p class="text-success"><input type="radio" value="user" name="role"><strong>user</strong></p></td>
 				</tr>
 			</table>
 			<input type="submit" value="login" />

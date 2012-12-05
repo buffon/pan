@@ -23,10 +23,13 @@ public class MDetailServlet extends BaseServlet {
 		// TODO(yehui.chen) Drop controller.
 		ImplDB implDB = DataBaseManager.getIns(ImplDB.class);
 		String mName = implDB.getMNamebyMid(mid);
+		List<String> usernames = implDB.getAllUsername();
 		ImplControl impl = getIns(ImplControl.class);
 		List<DMissionBean> dmissions = impl.getDetailByMid(mid);
+		request.setAttribute("mid", mid);
 		request.setAttribute("mName", mName);
 		request.setAttribute("dmissions", dmissions);
+		request.setAttribute("names", usernames);
 		request.getRequestDispatcher("/resource/page/missiondetail.jsp").forward(request, response);
 	}
 

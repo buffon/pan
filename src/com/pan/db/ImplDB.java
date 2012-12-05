@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -35,7 +34,7 @@ public class ImplDB extends DataBaseManager {
 		}
 	}
 	
-	public List<MissionBean> getMbyUserid(String userid) throws SQLException{
+	public List<MissionBean> getMbyUserid(String userid) throws Exception{
 		Connection conn = getConnection();
 		PreparedStatement stmt = conn.prepareStatement("SELECT * FROM mainmission where userid = ? order by id desc");
 		stmt.setString(1, userid);
@@ -44,8 +43,15 @@ public class ImplDB extends DataBaseManager {
 		while(rs.next()){
 			MissionBean bean = new MissionBean();
 			bean.setId(rs.getString("id"));
+			bean.setUsername(getNameByUserid(rs.getString("userid")));
 			bean.setMissionname(rs.getString("missionname"));
 			bean.setMissiondiscrip(rs.getString("missiondiscrip"));
+			bean.setStartTime(rs.getString("starttime"));
+			if(rs.getString("endtime") == null){
+				bean.setEndTime("");
+			}else{
+			    bean.setEndTime(rs.getString("endtime"));
+			}
 			bean.setStatus(rs.getString("status"));
 			missions.add(bean);
 		}
@@ -67,17 +73,7 @@ public class ImplDB extends DataBaseManager {
 			return "";
 		}
 	}
-	
-	public String getNameByUserid(String userid) throws Exception{
-		String sql = "select * from employee where id = ?";
-		ResultSet rs = handleSQL(sql, userid);
-		if(rs.next()){
-			return rs.getString("name");
-		}else{
-			return "";
-		}
-	}
-	
+
 	public String getMNamebyMid(String mid) throws Exception{
 		String sql = "select * from mainmission where id = ?";
 		ResultSet rs = handleSQL(sql, mid);
@@ -98,20 +94,12 @@ public class ImplDB extends DataBaseManager {
 		}
 	}
 	
-	public ResultSet handleSQL(String sql, String... params) throws SQLException{
-		Connection conn = getConnection();
-		PreparedStatement stmt = conn.prepareStatement(sql);
-		for(int i = 1; i <= params.length; i++){
-			stmt.setString(i, params[i-1]);
-		}
-		return stmt.executeQuery();	
-	}
-	
 	public boolean finishM(String mid) throws SQLException{
-		String sql = "update mainmission set status = 'finished' where id = ?";
+		String sql = "update mainmission set status = 'finished' , endtime = ? where id = ?";
 		Connection conn = getConnection();
 		PreparedStatement stmt = conn.prepareStatement(sql);
-		stmt.setString(1, mid);
+		stmt.setString(1, df.format(new Date()));
+		stmt.setString(2, mid);
 		int rs = stmt.executeUpdate();
 		System.out.println("update result = " + rs);
 		if(rs > 0){
@@ -122,10 +110,11 @@ public class ImplDB extends DataBaseManager {
 	}
 	
 	public boolean finishMDetail(String dmissionid) throws SQLException{
-		String sql = "update dmission set status = 'finished' where id = ?";
+		String sql = "update dmission set status = 'finished' ,endtime = ? where id = ?";
 		Connection conn = getConnection();
 		PreparedStatement stmt = conn.prepareStatement(sql);
-		stmt.setString(1, dmissionid);
+		stmt.setString(1, df.format(new Date()));
+		stmt.setString(2, dmissionid);
 		int rs = stmt.executeUpdate();
 		if(rs > 0){
 			return true;
@@ -144,21 +133,27 @@ public class ImplDB extends DataBaseManager {
 			bean.setHelper(getNameByUserid(rs.getString("helperid")));
 			bean.setDescrip(rs.getString("description"));
 			bean.setStatus(rs.getString("status"));
+			bean.setStartTime(rs.getString("starttime"));
+			if(rs.getString("endtime") == null){
+				bean.setEndTime("");
+			}else{
+			    bean.setEndTime(rs.getString("endtime"));
+			}
 			list.add(bean);
 		}
 		return list;
 	}
 	
 	public boolean addM(String missionname, String missiondiscrip, String userid) throws SQLException{
-		String sql = "insert into mainmission(missionname,missiondiscrip,userid,status,timestamp) values(?,?,?,?,?)";
+		String sql = "insert into mainmission(missionname,missiondiscrip,userid,status,starttime,endtime) values(?,?,?,?,?,?)";
 		Connection conn = getConnection();
 		PreparedStatement stmt = conn.prepareStatement(sql);
-		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		stmt.setString(1, missionname);
 		stmt.setString(2, missiondiscrip);
 		stmt.setString(3, userid);
 		stmt.setString(4, "running");
 		stmt.setString(5, df.format(new Date()));
+		stmt.setString(6, "");
 		int set = stmt.executeUpdate();
 		if(set == 1){
 		    return true;
@@ -168,10 +163,9 @@ public class ImplDB extends DataBaseManager {
 	}
 	
 	public boolean addMDetail(String missionid, String helperid,String content) throws SQLException{
-		String sql = "insert into dmission(missionid,helperid,description,status,timestamp) values(?,?,?,?,?)";
+		String sql = "insert into dmission(missionid,helperid,description,status,starttime) values(?,?,?,?,?)";
 		Connection conn = getConnection();
 		PreparedStatement stmt = conn.prepareStatement(sql);
-		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		stmt.setString(1, missionid);
 		stmt.setString(2, helperid);
 		stmt.setString(3, content);

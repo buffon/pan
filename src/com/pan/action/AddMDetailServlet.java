@@ -16,9 +16,9 @@ public class AddMDetailServlet extends BaseBean {
 	public void index(HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		ImplDB impl = DataBaseManager.getIns(ImplDB.class);
-		String userid = impl.getUserdByName((String) request.getSession().getAttribute("username"));
+		//String userid = impl.getUserdByName((String) request.getSession().getAttribute("username"));
 		String helperid = impl.getUserdByName(request.getParameter("helpername"));
-		String missionid = impl.getMidByMName(userid, request.getParameter("missionname"));
+		String missionid = request.getParameter("missionid");
 		String content = request.getParameter("content");
 		boolean result = impl.addMDetail(missionid, helperid,content);
 		if(result){

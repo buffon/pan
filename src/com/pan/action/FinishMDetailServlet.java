@@ -17,8 +17,7 @@ public class FinishMDetailServlet extends BaseServlet{
 		ImplDB impl = DataBaseManager.getIns(ImplDB.class);
 		boolean result = impl.finishMDetail(request.getParameter("dmissionid"));
 		if(result){
-			String userid = impl.getUserdByName((String) request.getSession().getAttribute("username"));
-			String missionid = impl.getMidByMName(userid, request.getParameter("missionname"));
+			String missionid =request.getParameter("missionid");
 			response.sendRedirect("mdetail.do?missionid=" + missionid);
 		}
 	}

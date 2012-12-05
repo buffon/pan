@@ -26,7 +26,7 @@ public class ImplControl extends BaseController {
         return false;
 	}
 	
-	public List<MissionBean> getMissionsByUserid(String userid) throws SQLException{
+	public List<MissionBean> getMissionsByUserid(String userid) throws Exception{
 		ImplDB impl = DataBaseManager.getIns(ImplDB.class);
 		return impl.getMbyUserid(userid);
 	}

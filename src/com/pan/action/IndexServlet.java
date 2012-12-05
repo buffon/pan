@@ -20,7 +20,6 @@ public class IndexServlet extends BaseServlet {
 		String username = (String) request.getSession().getAttribute("username");
 		ImplControl impl = getIns(ImplControl.class);
 		List<MissionBean> missions = impl.getMissionsByUserid(impl.getUseridByName(username));
-		request.setAttribute("username", username);
 		request.setAttribute("missions", missions);
 		request.getRequestDispatcher("/resource/page/index.jsp").forward(request, response);
 	}
