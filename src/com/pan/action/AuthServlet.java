@@ -29,7 +29,7 @@ public class AuthServlet extends BaseServlet {
 				response.sendRedirect("adminindex.do");
 			}
 		} else {
-			response.sendRedirect("/Pan/resource/page/login.jsp?message=wrong username or password");
+			response.sendRedirect("login.do?message=wrong username or password");
 		}
 	}
 

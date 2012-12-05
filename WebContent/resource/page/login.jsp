@@ -26,12 +26,12 @@ if(message != null){
 <%@ include file="head.inc.html"%>
 	<div class="login">
 		<p class="lead text-info" style="margin-left: 20px">welcome to login</p>
-		<%
-			Object message = request.getParameter("message");
+		<div class= "text-error" style="margin-left: 20px"><strong><%
+			Object message = request.getAttribute("message");
 			if (message != null) {
 				out.println(message.toString());
 			}
-		%>
+		%></strong></div>
 		<form method="post" action="./auth.do" style="margin-left: 20px">
 			<div id="message"></div>
 			<table class="table" style="width: 20%">
@@ -41,7 +41,7 @@ if(message != null){
 				</tr>
 				<tr>
 					<td><p class="text-success"><strong>password</strong></p></td>
-					<td><input type="text" name="password"></td>
+					<td><input type="password" name="password"></td>
 				</tr>
 				<tr>
 					<td><p class="text-success"><input type="radio" value="admin" name="role"><strong>admin</strong></p></td>
