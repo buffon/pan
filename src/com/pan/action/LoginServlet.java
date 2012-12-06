@@ -14,8 +14,7 @@ public class LoginServlet extends BaseServlet {
 	public void index(HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		request.setAttribute("message", request.getParameter("message"));
-		request.getRequestDispatcher("/resource/page/login.jsp").forward(
-				request, response);
+		request.getRequestDispatcher("/resource/page/login.jsp").forward(request, response);
 	}
 
 }

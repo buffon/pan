@@ -22,7 +22,7 @@
 </script>
 </head>
 <body>
-	<%@ include file="head.inc.html"%>
+	<%@ include file="head.inc.jsp"%>
 	<div align=right>
 	    <% if(request.getSession().getAttribute("role").equals("admin")){
 	    %>

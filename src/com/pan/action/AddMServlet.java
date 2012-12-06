@@ -15,8 +15,8 @@ public class AddMServlet extends BaseServlet {
 	
 	public void index(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ImplDB impl = DataBaseManager.getIns(ImplDB.class);
-		String missionname = request.getParameter("missionname");
-		String missiondiscrip = request.getParameter("description");
+		String missionname = request.getParameter("missionname").trim();
+		String missiondiscrip = request.getParameter("description").trim();
 		String userid = impl.getUserdByName((String) request.getSession().getAttribute("username"));
 		boolean result = impl.addM(missionname, missiondiscrip, userid);
 		System.out.println("addMission res = " + result);

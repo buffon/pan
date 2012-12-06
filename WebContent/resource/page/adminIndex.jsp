@@ -14,7 +14,7 @@ function showDetail(str){
 </script>
 </head>
 <body>
-    <%@ include file="head.inc.html"%>
+    <%@ include file="head.inc.jsp"%>
     <div align=right>
 		<a href="index.do">as user</a>&nbsp;|&nbsp;<a href="adminindex.do">as admin</a>&nbsp;|&nbsp;<a href="logout.do">logout</a>
 	</div>

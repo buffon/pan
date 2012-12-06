@@ -1,10 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+<%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
+<%@ taglib uri="/WEB-INF/mytaglib.tld" prefix="c"%> 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>index</title>
+
 <%@ include file="common.inc.html"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.pan.bean.MissionBean"%>
@@ -19,7 +20,7 @@ function showDetail(str){
 </script>
 </head>
 <body>
-<%@ include file="head.inc.html"%>
+<%@ include file="head.inc.jsp"%>
 
 	<div align=right>
 	<%
@@ -29,20 +30,20 @@ function showDetail(str){
 	<%
 	}
 	%>
-		<a href="logout.do">logout</a>
+		<a href="logout.do"><c:sr word="Logout"/></a>
 	</div>
-	<p class="lead text-info" style="margin-left: 20px">User <strong><%=request.getSession().getAttribute("username") %></strong></p>
+	<p class="lead text-info" style="margin-left: 20px"><c:sr word="User"/> <strong><%=request.getSession().getAttribute("username") %></strong></p>
 
 	<div>
-		<p class="text-success" style="margin-left: 20px"><strong>Existing Missions</strong></p>
+		<p class="text-success" style="margin-left: 20px"><strong><c:sr word="Existing_mission"/></strong></p>
 		<table class="table table-striped"
 			style="width: 60%; margin-left: 20px">
 			<tr>
-				<td><strong>mission name |</strong></td>
-				<td><strong>description |</strong></td>
-				<td><strong>start time</strong></td>
-				<td><strong>end time</strong></td>
-				<td><strong>status |</strong></td>
+				<td><strong><c:sr word="Mission_name"/> |</strong></td>
+				<td><strong><c:sr word="Description"/> |</strong></td>
+				<td><strong><c:sr word="Start_time"/></strong></td>
+				<td><strong><c:sr word="End_time"/></strong></td>
+				<td><strong><c:sr word="Status"/> |</strong></td>
 				<td></td>
 				<td></td>
 			</tr>
@@ -80,22 +81,22 @@ function showDetail(str){
 	</div>
 	<br>
 	<br>
-	<p class="text-success" style="margin-left: 20px"><strong>New a Mission</strong></p>
+	<p class="text-success" style="margin-left: 20px"><strong><c:sr word="New_mission"/></strong></p>
 	<div class="new">
 	<form action="addmission.do" method="post">
 		<table style="margin-left: 20px">
 			<tr>
-				<td><strong>mission name</strong></td>
+				<td><strong><c:sr word="Mission_name"/></strong></td>
 				<td><input type="text" name="missionname" size=47></td>
 			</tr>
 			<tr>
-				<td><strong>description</strong></td>
+				<td><strong><c:sr word="Description"/></strong></td>
 				<td><!-- <input type="text" name="description"> -->
 				  <textarea name="description" rows=10 cols=40></textarea>
 				</td>
 			</tr>
 			<tr>
-				<td><input type="submit" value="add"></td>
+				<td><input type="submit" value=<c:sr word="Add"/>></td>
 			</tr>
 		</table>
 	</form>
