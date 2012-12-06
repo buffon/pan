@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
+<%@ taglib uri="/WEB-INF/mytaglib.tld" prefix="c"%> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -31,19 +32,19 @@
 	    }
 	    %>
 
-		<a href="index.do">index</a>&nbsp;|&nbsp;<a href="logout.do">logout</a>
+		<a href="index.do"><c:sr word="Index"/></a>&nbsp;|&nbsp;<a href="logout.do"><c:sr word="Logout"/></a>
 	</div>
 	<p class="lead text-info" style="margin-left: 20px"><strong><%= (String) request.getSession().getAttribute("username")%></strong> >> <%= request.getAttribute("mName")%></p>
 
 	<div style="margin-left: 20px">
-		<p class="text-success"><strong>In order to finish this mission, I need help from:</strong></p>
+		<p class="text-success"><strong><c:sr word="M_detail_line"/></strong></p>
 		<table class="table table-striped" style="width: 60%">
 			<tr>
-				<td><strong>who |</strong></td>
-				<td><strong>description |</strong></td>
-				<td><strong>status |</strong></td>
-				<td><strong>startTime |</strong></td>
-				<td><strong>endTime |</strong></td>
+				<td><strong><c:sr word="Who"/> |</strong></td>
+				<td><strong><c:sr word="Description"/> |</strong></td>
+				<td><strong><c:sr word="Status"/> |</strong></td>
+				<td><strong><c:sr word="Start_time"/> |</strong></td>
+				<td><strong><c:sr word="End_time"/> |</strong></td>
 				<td></td>
 			</tr>
 			<%
@@ -80,10 +81,10 @@
 	<div class="addhelp" style="margin-left: 20px">
 	<form action="addmdtetail.do" method="post">
 	    <input type="hidden" name="missionid" value='<%= request.getAttribute("mid")%>'>
-		<table class="table" style="width: 20%">
+		<table class="table" style="width: 30%">
 			<tr>
-				<td><strong>who</strong></td>
-				<td><!-- <input type="text" name = "helpername"> -->
+				<td><strong><c:sr word="Who"/></strong></td>
+				<td>
 				 <select name="helpername">
 				  <%
 				   List<String> names = (List<String>)request.getAttribute("names");
@@ -101,13 +102,13 @@
 				</td>
 			</tr>
 			<tr>
-				<td><strong>content</strong></td>
+				<td><strong><c:sr word="Description"/></strong></td>
 				<td><!--<input type="text" name="content">-->
 				<textarea name="content" rows=10 cols=40></textarea>
 				</td>
 			</tr>
 		</table>
-		<input type="submit" value="add">
+		<input type="submit" value=<c:sr word="Add"/>>
 	</form>
 	</div>
 
