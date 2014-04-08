@@ -38,18 +38,31 @@ public class LoadServletListener implements ServletContextListener {
                     Class<?> clazz = myClassLoader.load(path);
                     Controller controller = (Controller) clazz.getAnnotation(Controller.class);
                     if (controller != null) {
-                        String uri = controller.value();
+                        String uri = null;
+                        RequestMapping requestMapping = clazz.getAnnotation(RequestMapping.class);
+                        if (requestMapping != null) {
+                            uri = requestMapping.value();
+                            if (!uri.contains("/")) {
+                                uri = "/" + uri;
+                            }
+                        }
                         Method[] methods = clazz.getDeclaredMethods();
 
                         Object action = clazz.newInstance();
                         for (Method method : methods) {
-                            RequestMapping requestMapping = method.getAnnotation(RequestMapping.class);
+                            requestMapping = method.getAnnotation(RequestMapping.class);
                             if (requestMapping != null) {
                                 String suburl = requestMapping.value();
-                                map.put(uri + "/" + suburl, new UrlMappingBean(action, method.getName()));
+                                if (suburl.contains("/")) {
+                                    map.put(suburl, new UrlMappingBean(action, method.getName()));
+                                } else if (uri != null) {
+                                    map.put(uri + "/" + suburl, new UrlMappingBean(action, method.getName()));
+                                } else {
+                                    map.put("/" + suburl, new UrlMappingBean(action, method.getName()));
+                                }
                             }
                         }
-
+                        map.put(uri, new UrlMappingBean(action));
                     }
                 }
             } else {

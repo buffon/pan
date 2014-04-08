@@ -12,6 +12,10 @@ public class UrlMappingBean {
 
     private String methodName;
 
+    public UrlMappingBean(Object object) {
+        this.object = object;
+    }
+
     public UrlMappingBean(Object object, String methodName) {
         this.object = object;
         this.methodName = methodName;
