@@ -16,7 +16,6 @@ public class IndexServlet extends BaseServlet {
 	private static final long serialVersionUID = 1L;
 
 	public void index(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("index page");
 		String username = (String) request.getSession().getAttribute("username");
 		ImplControl impl = getIns(ImplControl.class);
 		List<MissionBean> missions = impl.getMissionsByUserid(impl.getUseridByName(username));

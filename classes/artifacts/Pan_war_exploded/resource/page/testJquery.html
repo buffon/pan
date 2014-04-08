@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Jeffery</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <script type="text/javascript" src="js/jquery-1.6.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/base.css">
+    <style>
+
+        #nav a {
+            color: #FFFFFF;
+            font-size: 18px;
+            margin-left: 30px;
+        }
+
+        #nav a:hover {
+            color: #800000;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        ul li {
+            float: left;
+            margin-left: 30px;
+            padding-top: 10px;
+        }
+
+        #title {
+            font-size: 24px;
+            margin-left: 50px;
+            padding-top: 20px;
+            color: #800000;
+        }
+
+        #subtitle {
+            font-size: 16px;
+            margin-left: 80px;
+            margin-top: 10px;
+            color: #888888;
+        }
+
+        a {
+            text-decoration: none;
+            color: #0078B6;
+            margin-left: 30px;
+        }
+
+        #welcome {
+            padding: 30px;
+            font-size: 22px;
+            color: #800000;
+        }
+
+        #subwelcome {
+            padding-left: 50px;
+            font-size: 16px;
+            color: #aaaaaa;
+        }
+
+        .welcome {
+            padding-left: 50px;
+            font-size: 16px;
+            color: #aaaaaa;
+        }
+
+        .inc_title {
+            color: #800000;
+        }
+
+        li.back {
+            border-bottom: 5px solid #800000;
+            height: 35px;
+        }
+    </style>
+    <script language="javascript">
+        $(function () {
+            $.extend({
+                myajax: function (data) {
+                    $.ajax({
+                        type: 'get',
+                        url: data,
+                        dataType: 'text',
+                        success: function (data) {
+                            $("#content").html(data);
+                        }
+                    });
+                }
+            });
+            var calunderline = function (obj) {
+                var left = obj.offset().left;
+                var width = obj.width();
+                $("#underline").offset({"left": left - 10});
+                $("#underline").css("width",width+20);
+            }
+
+            $.myajax('dream/index.inc.html');
+            calunderline($("#index_a"));
+
+            $("#html_a").click(function () {
+                $.myajax('dream/html.inc.html');
+                calunderline($("#html_a"));
+
+            });
+            $("#index_a").click(function () {
+                $.myajax('dream/index.inc.html');
+                calunderline($("#index_a"));
+            });
+            $("#css_a").click(function () {
+                $.myajax('dream/css.inc.html');
+                calunderline($("#css_a"));
+            });
+            $("#javascript_a").click(function () {
+                $.myajax('dream/jquery.inc.html');
+                calunderline($("#javascript_a"));
+            });
+            $("#mvc_a").click(function () {
+                $.myajax('dream/mvc.inc.html');
+                calunderline($("#mvc_a"));
+            });
+
+        })
+    </script>
+</head>
+<body>
+<div id="container">
+    <div id="header">
+        <div id="title">Jeffery 1.0</div>
+        <div id="subtitle">希望你能在这里得到你想要的</div>
+    </div>
+
+    <div id="nav">
+        <ul>
+            <li style="margin-left: 0px">
+                <a href="#" id="index_a">首页</a>
+            </li>
+            <li>
+                <a href="#" id="html_a">html</a>
+            </li>
+            <li>
+                <a href="#" id="css_a">css</a>
+            </li>
+            <li>
+                <a href="#" id="javascript_a">javascript</a>
+            </li>
+            <li>
+                <a href="#" id="mvc_a">spring mvc</a>
+            </li>
+            <li>
+                <a href="#" id="data_a">spring data</a>
+            </li>
+            <li id="underline" class="back">
+            </li>
+        </ul>
+    </div>
+
+    <div id="content">
+
+    </div>
+
+    <hr style="color: #EEEEEE"/>
+
+    <div id="footer">
+
+        <div>
+            <a href="#">关于我</a>
+            <a href="#">我的数目</a>
+            <a href="#" target="_blank">博客</a>
+            <a href="#">加入我</a>
+            <a href="#">建议</a>
+            <a href="#">未来</a>
+        </div>
+
+        <p>Copyright © 2013 chenyehui. All Rights Reserved.</p>
+
+    </div>
+</div>
+</body>
+</html>

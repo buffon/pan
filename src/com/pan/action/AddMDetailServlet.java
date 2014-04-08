@@ -22,6 +22,7 @@ public class AddMDetailServlet extends BaseBean {
 		boolean result = impl.addMDetail(missionid, helperid,content);
 		if(result){
 			response.sendRedirect("mdetail.do?missionid=" + missionid);
+            response.setStatus(404);
 		}
 	}
 

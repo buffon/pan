@@ -1,0 +1,49 @@
+<style type="text/css">
+    #jquery_inc {
+        padding: 50px;
+        font-size: 16px;
+        color: #aaaaaa;
+    }
+    #jquery_main{
+        padding-left: 20px;
+    }
+    .three_title{
+        color: #0078B6;
+    }
+</style>
+
+<div id="jquery_inc">
+    <p class="inc_title"> js处理上灵活性比较大，本网站采用的是Jquery，因为它有丰富的插件选择。</p>
+
+    <div id="jquery_main">
+        <div id="jquery_main_0">
+            <p>由于ajax操作比较频繁，所以我封装了ajax方法到jquery类方法中，如果你了解js的话，将对js对象继承不陌生。</p>
+            <fieldset>
+                <legend>jquery source</legend>
+                <blockquote>
+                    $(function () { <br>
+                    &nbsp;&nbsp;$.extend({ <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;myajax: function (data) { <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;$.ajax({ <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;type: 'get', <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;url: data, <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;dataType: 'text', <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;success: function (data) { <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;$("#content").html(data); <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;} <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;}); <br>
+                    &nbsp;&nbsp;} <br>
+                    &nbsp;&nbsp;}); <br>
+                    }) <br>
+                </blockquote>
+            </fieldset>
+            <p class="three_title">技术点1: 利用ajax实现导航</p>
+            <fieldset>
+                <legend>jquery source2</legend>
+                <blockquote>
+                    $.myajax('dream/index.inc.html');
+                </blockquote>
+            </fieldset>
+        </div>
+    </div>
+</div>

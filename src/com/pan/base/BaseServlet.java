@@ -41,11 +41,8 @@ public  class BaseServlet extends HttpServlet {
 				.getServletContext().getAttribute("mapPath");
 
 		if (map.containsKey(uri)) {
-
 			Object obj = map.get(uri);
-
 			String methodName = request.getParameter("method");
-
 			if (methodName == null) {
 				methodName = "index";
 			}

@@ -1,0 +1,36 @@
+body, html {
+    margin: 0px;
+    font-size: 13px;
+    font-family: Tahoma, "微软雅黑", Arial;
+    background: #DDDDDD;
+}
+
+#container {
+    position: relative;
+    width: 1200px;
+    background: #FFFFFF;
+    margin: 0 auto;
+}
+
+#header {
+    height: 90px;
+}
+
+#nav {
+    height: 50px;
+    background: #6392AA;
+}
+
+#footer {
+    text-align: center;
+    height: 60px;
+    color: #aaaaaa;
+}
+
+image{
+    border: none;
+}
+
+h1,h2,h3,h4,h5,h6{font-size: 1em}
+
+html{overflow: -moz-scrollbars-vertical}

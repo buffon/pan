@@ -1,0 +1,30 @@
+#header{
+    width: 800px;
+    height: 80px;
+    border: 1px solid #AAAAAA;
+    margin: 10px auto;
+    background: #3B5998;
+}
+#logo{
+    float: left;
+    margin: 0 0 0 10px;
+    color: #FFF;
+    font-size: 3em;
+    font-weight: 700;
+    line-height: 80px;
+}
+
+#skin{
+    float: right;
+    margin: 10px;
+    padding: 40px;
+    width: 120px;
+    list-style: none;
+    border: 1px solid #CCCCCC;
+    background: #FFF;
+}
+
+#skin li{
+
+}
+
